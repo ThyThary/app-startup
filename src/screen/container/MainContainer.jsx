@@ -3,27 +3,30 @@ import { Link } from "react-router-dom";
 // const MainContainer = (props) => {
 const MainContainer = ({ children }) => {
   return (
-    <div className=" text-center">
-      <ul className="">
+    <div className="w-full  text-center">
+      <ul className="flex *:p-2 bg-blue-600 text-white font-serif">
         {/* Register Link */}
-        <li>
-          <Link to="/">Home</Link>
+        <li className="hover:bg-blue-900 ml-10 border-r-2 broder-white">
+          <Link to="/" className="">
+            Home
+          </Link>
         </li>
-        <li>
-          <Link to="/teach">Teacher</Link>
+
+        <li className="hover:bg-blue-900">
+          <Link to="/teacher">Teacher</Link>
         </li>
-        <li>
+        <li className="hover:bg-blue-900">
           <Link to="/student">Student</Link>
         </li>
-        <li>
+        <li className="hover:bg-blue-900">
           <Link to="class-room">Classroom</Link>
         </li>
-        <li>
+        <li className="hover:bg-blue-900">
           <Link to="/about">About us</Link>
         </li>
       </ul>
       {/* {props.children} */}
-      {children}
+      <div>{children}</div>
     </div>
   );
 };
