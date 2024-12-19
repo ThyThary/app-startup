@@ -22,6 +22,9 @@ const MainContainer = ({ children }) => {
           <Link to="class-room">Classroom</Link>
         </li>
         <li className="hover:bg-blue-900">
+          <Link to="/course">Course</Link>
+        </li>
+        <li className="hover:bg-blue-900">
           <Link to="/about">About us</Link>
         </li>
       </ul>
