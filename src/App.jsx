@@ -10,6 +10,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        {/* Register Link */}
         <div className="flex *:p-2 bg-blue-600 text-white font-serif pl-10">
           <Link className="hover:bg-blue-900" to="/">
             Home
