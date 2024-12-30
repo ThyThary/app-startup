@@ -1,20 +1,17 @@
 import React, { useState } from "react";
-import onlyEn from "../../js/validation/onlyEn.js";
 
 function HomeScreen() {
-  // const [id, setId] = useState(0);
+  const [id, setId] = useState(1);
   const [fName, setFname] = useState("");
   const [lName, setLname] = useState("");
   const [gender, setGender] = useState("");
   const [salary, setSalary] = useState();
   const [arrEmployee, setarrEmloyee] = useState([]);
-  // Add employee
+  // Add employee to table
   const handleAdd = () => {
-    // let number = 0;
-    // setId(number + 1);
-    // console.log(id);
+    setId(id + 1);
     var employee = {
-      // id: id,
+      id: id,
       fname: fName,
       lname: lName,
       gender: gender,
@@ -23,9 +20,15 @@ function HomeScreen() {
     var arrTemp = [...arrEmployee, employee];
     setarrEmloyee(arrTemp);
   };
-  const handleRemove = () => {};
+  // Remove employee from table
+  const handleRemove = (e) => {
+    const userId = e.target.id;
+    const removeEmployee = arrEmployee.filter((items) => items.id != userId);
+    setarrEmloyee(removeEmployee);
+  };
   return (
     <div className="flex h-[592px] font-serif bg-white">
+      {/* Employee form */}
       <div className="flex w-1/2 justify-center items-center text-center">
         <div className=" w-[350px] h-[400px] bg-slate-300 rounded-md shadow-neutral-2000">
           <div className=" mt-3">
@@ -39,7 +42,7 @@ function HomeScreen() {
                 First Name
               </label>
               <input
-                className=" rounded-md px-2 py-1.5 my-1 border border-blue-500 outline-none"
+                className=" rounded-md px-2 py-1.5 my-1 border hover:border-blue-500 outline-none"
                 type="text"
                 name="fName"
                 id="fName"
@@ -53,7 +56,7 @@ function HomeScreen() {
                 Last Name
               </label>
               <input
-                className=" rounded-md px-2 py-1.5 my-1 border border-blue-500 outline-none"
+                className=" rounded-md px-2 py-1.5 my-1 border hover:border-blue-500 outline-none"
                 type="text"
                 name="lName"
                 id="lName"
@@ -71,7 +74,7 @@ function HomeScreen() {
                 id="gender"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-                className="rounded-md px-2 py-1.5 my-1 border border-blue-500 outline-none"
+                className="rounded-md px-2 py-1.5 my-1 border hover:border-blue-500 outline-none"
               >
                 <option value="" disabled selected>
                   Select...
@@ -86,7 +89,7 @@ function HomeScreen() {
                 Salary
               </label>
               <input
-                className=" rounded-md px-2 py-1.5 my-1 border border-blue-500 outline-none"
+                className=" rounded-md px-2 py-1.5 my-1 border hover:border-blue-500 outline-none"
                 type="text"
                 name="salary"
                 id="salary"
@@ -106,8 +109,9 @@ function HomeScreen() {
           </div>
         </div>
       </div>
-      <div className="border-r border-yellow-500"></div>
-      <div className=" w-1/2">
+      <div className="border-r-2 border-yellow-500"></div>
+      {/* List employee */}
+      <div className=" w-1/2 overflow-y-auto">
         <div className="relative overflow-x-auto rounded-lg m-10 border border-gray-200">
           <table className="text-center w-full text-sm *:whitespace-nowrap text-black">
             <thead className="">
@@ -121,10 +125,10 @@ function HomeScreen() {
             </thead>
 
             <tbody className="odd:bg-slate-50">
-              {arrEmployee.map((items, index) => {
+              {arrEmployee.map((items) => {
                 return (
                   <tr className=" hover:bg-gray-100 *:py-1 *:px-3 font-serif border-b dark:border-gray-400 ">
-                    <td>{index + 1}</td>
+                    <td>{items.id}</td>
                     <td>
                       {items.fname} {items.lname}
                     </td>
@@ -132,6 +136,7 @@ function HomeScreen() {
                     <td>${items.salary}</td>
                     <td className="w-24">
                       <button
+                        id={items.id}
                         onClick={handleRemove}
                         className=" bg-red-500 rounded-md text-white py-1.5 px-2 hover:bg-red-700"
                       >
